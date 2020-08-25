@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
@@ -15,6 +17,9 @@ public class HomePage extends BasePage {
 
     @FindBy(css = "#root input")
     WebElement todo;
+
+    @FindBy(xpath = "//ul[@class='todo-list']//label")
+    List<WebElement> todos;
 
     String addedNote =
             "//ul[@class='todo-list']//label[contains(text(), '%s')]";
@@ -27,5 +32,9 @@ public class HomePage extends BasePage {
 
     public WebElement findNoteWith(String text) {
         return getElement(By.xpath(String.format(addedNote, text)));
+    }
+
+    public int getNotCompletedToDosCount() {
+        return todos.size();
     }
 }
