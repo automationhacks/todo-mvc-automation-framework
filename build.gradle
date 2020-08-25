@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+    }
+}
+
+plugins {
+    id 'maven-publish'
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+subprojects {
+    group = 'blog.automationhacks'
+    version = '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+
+    dependencies {
+        compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+        testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    }
+}

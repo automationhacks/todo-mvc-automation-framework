@@ -1,0 +1,13 @@
+tasks.withType(Test) {
+    systemProperties = [
+            tag: System.getProperty('tag', 'NONE'),
+    ]
+}
+
+task runTests(type: Test) {
+    useTestNG() {
+        testLogging.showStandardStreams = true
+        includeGroups System.getProperty('tag', 'NONE')
+    }
+}
+
