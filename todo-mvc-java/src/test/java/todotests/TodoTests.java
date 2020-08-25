@@ -7,7 +7,12 @@ import org.testng.annotations.Test;
 import pageobjects.FooterPage;
 import pageobjects.HomePage;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class TodoTests extends BaseTest {
+    List<String> testTodos = Arrays.asList("Eat", "Sleep", "Code", "Repeat");
+
     @Test(groups = Tags.REGRESSION)
     public void testAddTodo() {
         HomePage home = new HomePage(driver);
@@ -20,14 +25,24 @@ public class TodoTests extends BaseTest {
 
     @Test(groups = Tags.REGRESSION)
     public void testToDoItemsLeft() {
-        HomePage home = new HomePage(driver);
-        home.addTodo("Get work done");
-        home.addTodo("relax");
+        HomePage home = new HomePage(driver)
+                .addTodo("Get work done")
+                .addTodo("relax");
 
         int notDoneCount = home.getNotCompletedToDosCount();
-        FooterPage footer = new FooterPage(driver);
-        int actual = footer.getItemsLeftCount();
+        int actual = new FooterPage(driver).getItemsLeftCount();
 
         Assert.assertEquals(actual, notDoneCount);
+    }
+
+    @Test(groups = Tags.REGRESSION)
+    public void testAddMultipleToDosAndCompleteOne() {
+        HomePage home = new HomePage(driver);
+        for (String todo : testTodos) {
+            home.addTodo(todo);
+        }
+
+
+
     }
 }

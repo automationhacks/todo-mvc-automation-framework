@@ -25,9 +25,10 @@ public class HomePage extends BasePage {
             "//ul[@class='todo-list']//label[contains(text(), '%s')]";
 
 
-    public void addTodo(String todoNote) {
+    public HomePage addTodo(String todoNote) {
         enterText(todo, todoNote);
         pressEnter(todo);
+        return this;
     }
 
     public WebElement findNoteWith(String text) {
