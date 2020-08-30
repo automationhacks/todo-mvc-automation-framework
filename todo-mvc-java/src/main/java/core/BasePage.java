@@ -33,4 +33,17 @@ public class BasePage {
     public String getText(WebElement elem) {
         return elem.getText();
     }
+
+    public boolean isElementVisible(By by) {
+        try {
+            WebElement elem = getElement(by);
+            if (elem.isDisplayed()) {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
+        return false;
+    }
 }

@@ -2,6 +2,7 @@ package todotests;
 
 import base.BaseTest;
 import config.Tags;
+import core.utils.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageobjects.FooterPage;
@@ -36,13 +37,14 @@ public class TodoTests extends BaseTest {
     }
 
     @Test(groups = Tags.REGRESSION)
-    public void testAddMultipleToDosAndCompleteOne() {
+    public void testAddMultipleToDosAndCompleteOne() throws InterruptedException {
         HomePage home = new HomePage(driver);
         for (String todo : testTodos) {
             home.addTodo(todo);
         }
 
-
-
+        String task = "Sleep";
+        boolean isCompleted = home.completeToDo(task).isToDoCompleted(task);
+        Assert.assertTrue(isCompleted);
     }
 }

@@ -24,6 +24,10 @@ public class HomePage extends BasePage {
     String addedNote =
             "//ul[@class='todo-list']//label[contains(text(), '%s')]";
 
+    String todoListXPath = "//ul[@class=\"todo-list\"]";
+    String todoItemToCheckXPath = "//label[contains(text(), \"%s\")]//parent::div//input";
+    String completedTodo = "//li[@class=\"completed\"]//label[contains(text(), \"%s\")]";
+
 
     public HomePage addTodo(String todoNote) {
         enterText(todo, todoNote);
@@ -37,5 +41,17 @@ public class HomePage extends BasePage {
 
     public int getNotCompletedToDosCount() {
         return todos.size();
+    }
+
+    public HomePage completeToDo(String todoItem) {
+        WebElement todos = getElement(By.xpath(todoListXPath));
+        WebElement toDoCheckBox = todos.findElement(By.xpath(String.format(todoItemToCheckXPath, todoItem)));
+
+        toDoCheckBox.click();
+        return this;
+    }
+
+    public boolean isToDoCompleted(String name) {
+        return isElementVisible(By.xpath(String.format(completedTodo, name)));
     }
 }

@@ -1,6 +1,6 @@
 package base;
 
-import config.Base;
+import core.utils.PropertiesReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,7 +12,8 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get(Base.BASE_URL);
+        String baseUrl = new PropertiesReader().getBaseURI();
+        driver.get(baseUrl);
     }
 
     @AfterMethod(alwaysRun = true)
