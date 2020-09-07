@@ -8,6 +8,8 @@ task runTests(type: Test) {
     useTestNG() {
         testLogging.showStandardStreams = true
         includeGroups System.getProperty('tag', 'NONE')
+        parallel = "methods"
+        threadCount = 3
     }
 }
 
